@@ -2,6 +2,7 @@ package ua.foxminded.university.model;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Getter @Setter @ToString
 @Entity
@@ -14,9 +15,11 @@ public class TimeTable {
     private int id;
 
     @Column(name = "start")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private String start;
 
     @Column(name = "duration")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private String duration;
 
     public TimeTable(int id, String start, String duration) {
