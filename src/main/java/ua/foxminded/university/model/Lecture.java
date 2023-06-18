@@ -15,7 +15,7 @@ public class Lecture {
     @Column(name = "id")
     private int id;
 
-    @Column(name = "lectureName")
+    @Column(name = "lecture_name")
     private String lectureName;
 
     @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER, targetEntity = Group.class)

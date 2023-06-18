@@ -16,10 +16,10 @@ public class Group {
     @Column(name = "id")
     private int id;
 
-    @Column(name = "groupName")
+    @Column(name = "group_name")
     private String name;
 
-    @OneToMany(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY, mappedBy = "group")
+    @OneToMany(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER, mappedBy = "group")
     private List<Student> studentList;
 
     @OneToMany(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY, mappedBy = "group")

@@ -4,7 +4,9 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
-@Getter @Setter @ToString
+@Getter
+@Setter
+@ToString
 @Entity
 @Table(name = "timetable", schema = "cms")
 public class TimeTable {
@@ -15,11 +17,11 @@ public class TimeTable {
     private int id;
 
     @Column(name = "start")
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @DateTimeFormat(pattern = "HH:ss")
     private String start;
 
     @Column(name = "duration")
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @DateTimeFormat(pattern = "HH:ss")
     private String duration;
 
     public TimeTable(int id, String start, String duration) {
