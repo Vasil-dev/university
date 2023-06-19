@@ -11,7 +11,7 @@ import ua.foxminded.university.service.impl.LectureServiceImpl;
 import java.util.List;
 
 @Controller
-@RequestMapping("/lectures")
+@RequestMapping("/lecture")
 public class LectureController {
 
     private final LectureServiceImpl lectureService;
@@ -21,10 +21,10 @@ public class LectureController {
         this.lectureService = lectureService;
     }
 
-    @GetMapping
+    @GetMapping("/all")
     public String getAllStudents(Model model) {
         List<Lecture> lectures = lectureService.getAll();
         model.addAttribute("lectures", lectures);
-        return "lectures/LecturePage";
+        return "lecture/LecturePage";
     }
 }

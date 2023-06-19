@@ -43,4 +43,5 @@ public class GroupServiceImpl implements GroupService {
     public void delete(long id) {
         groupRepository.deleteById(id);
     }
+
 }

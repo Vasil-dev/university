@@ -11,7 +11,7 @@ import ua.foxminded.university.service.impl.TeacherServiceImpl;
 import java.util.List;
 
 @Controller
-@RequestMapping("/teachers")
+@RequestMapping("/teacher")
 public class TeacherController {
 
     private final TeacherServiceImpl teacherService;
@@ -21,10 +21,10 @@ public class TeacherController {
         this.teacherService = teacherService;
     }
 
-    @GetMapping
-    public String getAllStudents(Model model) {
+    @GetMapping("/all")
+    public String getAllTeachers(Model model) {
         List<Teacher> teachers = teacherService.getAll();
         model.addAttribute("teachers", teachers);
-        return "teachers/TeacherPage";
+        return "teacher/TeacherPage";
     }
 }

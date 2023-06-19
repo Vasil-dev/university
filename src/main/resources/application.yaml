@@ -1,0 +1,6 @@
+spring:
+  webjars:
+    prefix: /webjars
+  web:
+    resources:
+      add-mappings: true

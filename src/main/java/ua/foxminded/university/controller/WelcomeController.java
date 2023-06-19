@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class WelcomeController {
 
 
-    @GetMapping
+    @GetMapping("/all")
     public String home() {
         return "Welcome";
     }

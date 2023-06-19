@@ -9,9 +9,8 @@ import ua.foxminded.university.service.impl.GroupServiceImpl;
 
 import java.util.List;
 
-
 @Controller
-@RequestMapping("/groups")
+@RequestMapping("/group")
 public class GroupController {
 
     private final GroupServiceImpl groupService;
@@ -21,11 +20,10 @@ public class GroupController {
         this.groupService = groupService;
     }
 
-    @GetMapping
+    @GetMapping("/all")
     public String getAllGroups(Model model) {
         List<Group> groups = groupService.getAll();
         model.addAttribute("groups", groups);
-        return "groups/GroupsPage";
+        return "group/GroupPage";
     }
-
 }
