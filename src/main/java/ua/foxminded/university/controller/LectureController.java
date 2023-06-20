@@ -22,7 +22,7 @@ public class LectureController {
     }
 
     @GetMapping("/all")
-    public String getAllStudents(Model model) {
+    public String getAllLectures(Model model) {
         List<Lecture> lectures = lectureService.getAll();
         model.addAttribute("lectures", lectures);
         return "lecture/LecturePage";
