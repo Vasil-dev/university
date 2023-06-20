@@ -2,9 +2,13 @@ package ua.foxminded.university.controller;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
+import org.junit.runner.RunWith;
 import org.mockito.MockitoAnnotations;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.ui.Model;
 import ua.foxminded.university.model.Group;
 import ua.foxminded.university.service.impl.GroupServiceImpl;
@@ -12,19 +16,21 @@ import ua.foxminded.university.service.impl.GroupServiceImpl;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
+@RunWith(SpringRunner.class)
+@WebMvcTest(GroupController.class)
 class GroupControllerTest {
 
-    @Mock
+    @Autowired
+    private MockMvc mvc;
+
+    @MockBean
     private GroupServiceImpl groupService;
 
-    @InjectMocks
-    private GroupController groupController;
-
-    @Mock
+    @MockBean
     private Model model;
 
     @BeforeEach
@@ -33,16 +39,16 @@ class GroupControllerTest {
     }
 
     @Test
-    void testGetAllGroups() {
+    void testGetAllGroups() throws Exception {
         List<Group> groups = new ArrayList<>();
         groups.add(new Group(1,"Group A"));
         groups.add(new Group(2,"Group B"));
         when(groupService.getAll()).thenReturn(groups);
 
-        String groupsFromController = groupController.getAllGroups(model);
-        assertEquals("group/GroupPage",groupsFromController);
-        verify(model).addAttribute("groups", groups);
-        verify(groupService).getAll();
+        mvc.perform(get("/group/all"))
+                .andExpect(status().isOk())
+                .andExpect(view().name("group/GroupPage"))
+                .andExpect(model().attribute("groups", groups));
 
     }
 }
