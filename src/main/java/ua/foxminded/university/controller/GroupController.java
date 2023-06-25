@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import ua.foxminded.university.dto.GroupDto;
 import ua.foxminded.university.model.Group;
 import ua.foxminded.university.service.impl.GroupServiceImpl;
 
@@ -25,5 +26,18 @@ public class GroupController {
         List<Group> groups = groupService.getAll();
         model.addAttribute("groups", groups);
         return "group/GroupPage";
+    }
+
+    @GetMapping("/new")
+    public String showCreateGroupForm(Model model) {
+        Group group = new Group();
+        model.addAttribute("group", group);
+        return "group/CreateGroup";
+    }
+
+    @PostMapping("/new")
+    public String createGroup(@ModelAttribute("group") Group group) {
+        groupService.create(group);
+        return "redirect:/group/all";
     }
 }

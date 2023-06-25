@@ -41,7 +41,7 @@ class GroupControllerTest {
     @Test
     void testGetAllGroups() throws Exception {
         List<Group> groups = new ArrayList<>();
-        groups.add(new Group(1,"Group A"));
+        groups.add(new Group(1,"Group A" ));
         groups.add(new Group(2,"Group B"));
         when(groupService.getAll()).thenReturn(groups);
 
