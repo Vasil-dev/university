@@ -1,6 +1,5 @@
 package ua.foxminded.university.service.impl;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ua.foxminded.university.model.TimeTable;
 import ua.foxminded.university.repository.TimeTableRepository;
@@ -13,7 +12,6 @@ public class TimeTableServiceImpl implements TimeTableService {
 
     private final TimeTableRepository timeTableRepository;
 
-    @Autowired
     public TimeTableServiceImpl(TimeTableRepository timeTableRepository) {
         this.timeTableRepository = timeTableRepository;
     }

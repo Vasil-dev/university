@@ -1,6 +1,5 @@
 package ua.foxminded.university.service.impl;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ua.foxminded.university.model.Lecture;
 import ua.foxminded.university.repository.LectureRepository;
@@ -13,7 +12,6 @@ public class LectureServiceImpl implements LectureService {
 
     private final LectureRepository lectureRepository;
 
-    @Autowired
     public LectureServiceImpl(LectureRepository lectureRepository) {
         this.lectureRepository = lectureRepository;
     }

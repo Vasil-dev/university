@@ -1,6 +1,6 @@
 package ua.foxminded.university.service;
 
-import ua.foxminded.university.Registration;
+import ua.foxminded.university.dto.Registration;
 import ua.foxminded.university.model.UserEntity;
 
 import java.util.List;

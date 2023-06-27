@@ -1,4 +1,4 @@
-package ua.foxminded.university;
+package ua.foxminded.university.dto;
 
 import lombok.Data;
 

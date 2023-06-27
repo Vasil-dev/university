@@ -6,8 +6,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import ua.foxminded.university.Registration;
+import ua.foxminded.university.dto.Registration;
 import ua.foxminded.university.model.UserEntity;
 import ua.foxminded.university.service.UserService;
 
@@ -22,32 +21,28 @@ public class AuthController {
     }
 
     @GetMapping("/login")
-    public String loginPage(){
+    public String loginPage() {
         return "login/login";
     }
 
-//    @GetMapping("/register")
-//    public String getRegisterForm(Model model) {
-//        Registration user = new Registration();
-//        model.addAttribute("user", user);
-//        return "login/register";
-//    }
-
     @PostMapping("/register/save")
-    public String register(@Valid @ModelAttribute("user")Registration user,
-                           BindingResult result, Model model) {
+    public String register(@Valid @ModelAttribute("user") Registration user, BindingResult result, Model model) {
         UserEntity existingUserEmail = userService.findByEmail(user.getEmail());
-        if(existingUserEmail != null && existingUserEmail.getEmail() != null && !existingUserEmail.getEmail().isEmpty()) {
+        if (existingUserEmail != null && existingUserEmail.getEmail() != null && !existingUserEmail.getEmail().isEmpty()) {
             return "redirect:/register?fail";
         }
+
         UserEntity existingUserUsername = userService.getUserByUsername(user.getUserName());
-        if(existingUserUsername != null && existingUserUsername.getUserName() != null && !existingUserUsername.getUserName().isEmpty()) {
+        if (existingUserUsername != null && existingUserUsername.getUserName() != null
+                && !existingUserUsername.getUserName().isEmpty()) {
             return "redirect:/register?fail";
         }
-        if(result.hasErrors()) {
+
+        if (result.hasErrors()) {
             model.addAttribute("user", user);
             return "login/register";
         }
+
         userService.saveUser(user);
         return "redirect:/clubs?success";
     }
