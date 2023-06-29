@@ -29,6 +29,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public void saveUser(Registration registration) {
         UserEntity user = new UserEntity();
+        user.setId(registration.getId());
         user.setUserName(registration.getUserName());
         user.setEmail(registration.getEmail());
         user.setPassword((passwordEncoder.encode(registration.getPassword())));
@@ -55,7 +56,17 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<UserEntity> getAllUsers() {
-        return users;
+        return userRepository.findAll();
+    }
+
+    @Override
+    public UserEntity getUserById() {
+        return null;
+    }
+
+    @Override
+    public UserEntity getUserById(int id) {
+        return userRepository.findById(id);
     }
 
     @Override
@@ -70,4 +81,13 @@ public class UserServiceImpl implements UserService {
             users.remove(user);
         }
     }
+
+    @Override
+    public void deleteUserById(int id) {
+        UserEntity user = getUserById(id);
+        if (user != null) {
+            users.remove(user);
+        }
+    }
 }
+

@@ -12,6 +12,12 @@ public interface UserService {
     UserEntity getUserByUsername(String username);
     List<UserEntity> getAllUsers();
 
+    UserEntity getUserById();
+
+    UserEntity getUserById(int id);
+
     UserEntity findByEmail(String email);
     void deleteUser(String username);
+
+    void deleteUserById(int id);
 }

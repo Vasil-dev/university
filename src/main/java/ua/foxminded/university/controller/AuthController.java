@@ -1,5 +1,7 @@
 package ua.foxminded.university.controller;
 
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -44,6 +46,13 @@ public class AuthController {
         }
 
         userService.saveUser(user);
-        return "redirect:/clubs?success";
+        return "redirect:/users/all";
     }
+
+
+    @GetMapping("/logout")
+    public String logout(HttpServletRequest request, HttpServletResponse response) {
+        return "redirect:/login";
+    }
+
 }

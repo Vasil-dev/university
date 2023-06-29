@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Assign Role</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+    <h1>Assign Role</h1>
+
+    <form method="post" th:action="@{/users/edit/save}">
+        <div class="form-group">
+            <label for="roleId">User:</label>
+            <select class="form-control" id="userId" name="userId">
+                <option th:each="user : ${user}" th:value="${user.userName}" th:text="${user.userName}"></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="roleId">Role:</label>
+            <select class="form-control" id="roleId" name="roleId">
+                <option th:each="role : ${roles}" th:value="${role.name}" th:text="${role.name}"></option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Assign Role</button>
+        <a href="/users/all" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+
+

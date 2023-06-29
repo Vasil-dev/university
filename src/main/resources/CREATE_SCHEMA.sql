@@ -56,7 +56,10 @@ CREATE TABLE cms.users (
                            id SERIAL PRIMARY KEY,
                            user_name VARCHAR NOT NULL,
                            email VARCHAR NOT NULL,
-                           password VARCHAR NOT NULL
+                           password VARCHAR NOT NULL,
+                           role_id INT,
+                           FOREIGN KEY (role_id) REFERENCES cms.roles(id)
+
 );
 DROP TABLE IF EXISTS cms.user_roles CASCADE;
 CREATE TABLE cms.user_roles (
