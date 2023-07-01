@@ -42,27 +42,30 @@ public class AdminPanelController {
         List<Role> roles = roleService.getAllRoles();
         model.addAttribute("user", user);
         model.addAttribute("roles", roles);
+
         return "users/get_role";
     }
 
     @PostMapping("/edit/save")
     public String assignRole(String name,String roleName) {
         UserEntity user = userService.getUserByUsername(name);
-        Role role = roleService.getRoleByName(roleName); // Assuming you have a service for managing roles
+        Role role = roleService.getRoleByName(roleName);
         user.setRoles(Collections.singletonList(role));
         userService.createUser(user);
         return "redirect:/users";
     }
 
-    @GetMapping("/delete/{userName}")
-    public String showDeleteUserForm(@PathVariable("userName") String userName, Model model) {
-        UserEntity user = userService.getUserByUsername(userName);
+
+    @GetMapping("/delete/")
+    public String showDeleteUserForm( Model model) {
+        List<UserEntity> user = userService.getAllUsers();
         model.addAttribute("user", user);
         return "users/delete";
     }
 
-    @PostMapping("/delete/")
-    public String deleteUser(@RequestParam("userName") String userName) {
+    @PostMapping("/delete/{userName}")
+    public String deleteUser(@PathVariable("userName") String userName) {
+        userService.getUserByUsername(userName);
         userService.deleteUser(userName);
         return "redirect:/users/all";
     }
