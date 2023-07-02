@@ -10,10 +10,10 @@
     <h1>Delete User</h1>
 
     <p>Are you sure you want to delete this user?</p>
-    <form method="post" action="/users/delete/{userName}">
+    <form method="post" action="/users/delete">
         <div class="form-group">
-            <label for="userId">User:</label>
-            <select class="form-control" id="userId" name="userId">
+            <label for="userName">User:</label>
+            <select class="form-control" id="userName" name="userName">
                 <option th:each="user : ${user}" th:value="${user.userName}" th:text="${user.userName}"></option>
             </select>
 

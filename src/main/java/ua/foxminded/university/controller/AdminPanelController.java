@@ -36,35 +36,38 @@ public class AdminPanelController {
         return "/users/add_user";
     }
 
-    @GetMapping("/edit")
-    public String assignRoleForm( Model model) {
-        List<UserEntity> user = userService.getAllUsers();
+    @RequestMapping("/edit")
+    public String assignRoleForm(Model model) {
+        List<UserEntity> users = userService.getAllUsers();
         List<Role> roles = roleService.getAllRoles();
-        model.addAttribute("user", user);
-        model.addAttribute("roles", roles);
+        model.addAttribute("usersList", users);
+        model.addAttribute("rolesList", roles);
 
         return "users/get_role";
     }
 
     @PostMapping("/edit/save")
-    public String assignRole(String name,String roleName) {
-        UserEntity user = userService.getUserByUsername(name);
+    public String assignRole(@RequestParam("userName") String userName, @RequestParam("roleName") String roleName) {
+        UserEntity user = userService.getUserByUsername(userName);
         Role role = roleService.getRoleByName(roleName);
-        user.setRoles(Collections.singletonList(role));
-        userService.createUser(user);
-        return "redirect:/users";
+
+        if (user != null && role != null) {
+            user.setRoles(Collections.singletonList(role));
+            userService.createUser(user);
+        }
+        return "redirect:/users/all";
     }
 
 
-    @GetMapping("/delete/")
+    @RequestMapping("/delete/page")
     public String showDeleteUserForm( Model model) {
         List<UserEntity> user = userService.getAllUsers();
         model.addAttribute("user", user);
         return "users/delete";
     }
 
-    @PostMapping("/delete/{userName}")
-    public String deleteUser(@PathVariable("userName") String userName) {
+    @PostMapping("/delete")
+    public String deleteUser(@RequestParam("userName") String userName) {
         userService.getUserByUsername(userName);
         userService.deleteUser(userName);
         return "redirect:/users/all";
