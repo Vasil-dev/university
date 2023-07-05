@@ -46,30 +46,21 @@ public class AdminPanelController {
         return "users/get_role";
     }
 
-    @PostMapping("/edit/save")
-    public String assignRole(@RequestParam("userName") String userName, @RequestParam("roleName") String roleName) {
-        UserEntity user = userService.getUserByUsername(userName);
-        Role role = roleService.getRoleByName(roleName);
+    @PostMapping("/edit/{userId}/save")
+    public String assignRole(@PathVariable("userId") int userId) {
+
+        Role role = roleService.getRoleById(1);
+        UserEntity user = userService.getUserById(userId);
 
         if (user != null && role != null) {
             user.setRoles(Collections.singletonList(role));
-            userService.createUser(user);
         }
         return "redirect:/users/all";
     }
 
-
-    @RequestMapping("/delete/page")
-    public String showDeleteUserForm( Model model) {
-        List<UserEntity> user = userService.getAllUsers();
-        model.addAttribute("user", user);
-        return "users/delete";
-    }
-
-    @PostMapping("/delete")
-    public String deleteUser(@RequestParam("userName") String userName) {
-        userService.getUserByUsername(userName);
-        userService.deleteUser(userName);
+    @PostMapping("/{userId}/delete")
+    public String deleteUser(@PathVariable("userId") int userId) {
+        userService.deleteUserById(userId);
         return "redirect:/users/all";
     }
 }
