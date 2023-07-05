@@ -72,7 +72,7 @@ public class UserServiceImpl implements UserService {
     public void deleteUser(String username) {
         UserEntity user = getUserByUsername(username);
         if (user != null) {
-            users.remove(user);
+            userRepository.delete(user);
         }
     }
 
@@ -80,8 +80,7 @@ public class UserServiceImpl implements UserService {
     public void deleteUserById(int id) {
         UserEntity user = getUserById(id);
         if (user != null) {
-            users.remove(user);
+            userRepository.delete(user);
         }
     }
 }
-

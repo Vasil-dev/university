@@ -19,6 +19,7 @@ import java.util.List;
 @Getter
 @Setter
 @Entity
+@ToString
 @Table(name = "users", schema = "cms")
 public class UserEntity {
     @Id
