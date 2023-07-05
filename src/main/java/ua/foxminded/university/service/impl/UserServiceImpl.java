@@ -39,19 +39,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserEntity createUser(UserEntity user) {
-        users.add(user);
-        return user;
+    public UserEntity updateUser(UserEntity user) {
+        return userRepository.save(user);
     }
 
     @Override
     public UserEntity getUserByUsername(String username) {
-        for (UserEntity user : users) {
-            if (user.getUserName().equals(username)) {
-                return user;
-            }
-        }
-        return null;
+        return userRepository.findByUserName(username);
     }
 
     @Override
