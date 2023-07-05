@@ -52,8 +52,10 @@ public class AdminPanelController {
         Role role = roleService.getRoleByName(roleName);
 
         if (user != null && role != null) {
-            user.setRoles(Collections.singletonList(role));
-            userService.createUser(user);
+            final List<Role> userRoles = user.getRoles();
+            userRoles.add(role);
+            user.setRoles(userRoles);
+            userService.updateUser(user);
         }
         return "redirect:/users/all";
     }

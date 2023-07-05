@@ -8,7 +8,7 @@ import java.util.List;
 public interface UserService {
     void saveUser(Registration registration);
 
-    UserEntity createUser(UserEntity user);
+    UserEntity updateUser(UserEntity user);
     UserEntity getUserByUsername(String username);
     List<UserEntity> getAllUsers();
 
