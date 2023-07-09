@@ -56,15 +56,39 @@
         <tr>
             <th>ID</th>
             <th>Name</th>
+            <th>Group</th>
+            <th>Teacher</th>
         </tr>
         </thead>
         <tbody>
         <tr th:each="lecture : ${lectures}">
             <td class="h6" th:text="${lecture.getId}"></td>
             <td th:text="${lecture.getLectureName}"></td>
+            <td th:text="${lecture.getGroup}"></td>
+            <td th:text="${lecture.getTeacher}"></td>
+            <td>
+                <form method="post" th:action="@{/lecture/{lectureId}/delete(lectureId=${lecture.id})}">
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                </form>
+            </td>
         </tr>
         </tbody>
     </table>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div>
+            <a href="/lecture/new" class="btn btn-success">Add new Lecture</a>
+        </div>
+        <div>
+            <form method="post" th:action="@{/lecture/add/group}">
+                <button type="submit" class="btn btn-primary">Add Group To Lecture</button>
+            </form>
+        </div>
+        <div>
+            <form method="post" th:action="@{/lecture/add/teacher}">
+                <button type="submit" class="btn btn-primary">Add Teacher To Lecture</button>
+            </form>
+        </div>
+    </nav>
 </div>
 </body>
 </html>

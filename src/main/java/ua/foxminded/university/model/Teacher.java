@@ -16,7 +16,7 @@ import lombok.ToString;
 import java.util.List;
 import java.util.Objects;
 
-@Getter @Setter @ToString
+@Getter @Setter
 @Entity
 @Table(name = "teachers", schema = "cms")
 public class Teacher {
@@ -57,5 +57,10 @@ public class Teacher {
     @Override
     public int hashCode() {
         return Objects.hash(id, firstName, lastName);
+    }
+
+    @Override
+    public String toString() {
+        return firstName + " " + lastName;
     }
 }

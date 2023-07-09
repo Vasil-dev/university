@@ -18,7 +18,7 @@ import lombok.ToString;
 import java.util.List;
 import java.util.Objects;
 
-@Getter @Setter @ToString
+@Getter @Setter
 @Entity
 @Table(name = "students", schema = "cms")
 public class Student {
@@ -62,4 +62,5 @@ public class Student {
     public int hashCode() {
         return Objects.hash(id, firstName, lastName, group, lectures);
     }
+
 }

@@ -17,7 +17,7 @@ import lombok.ToString;
 import java.util.List;
 import java.util.Objects;
 
-@Getter @Setter @ToString
+@Getter @Setter
 @Entity
 @Table(name = "groups", schema = "cms")
 public class Group {
@@ -55,5 +55,10 @@ public class Group {
     @Override
     public int hashCode() {
         return Objects.hash(id, name, studentList, lectures);
+    }
+
+    @Override
+    public String toString() {
+        return name;
     }
 }

@@ -22,6 +22,11 @@ public class GroupServiceImpl implements GroupService {
     }
 
     @Override
+    public Group getByName(String name) {
+        return groupRepository.findByName(name);
+    }
+
+    @Override
     public List<Group> getAll() {
         return groupRepository.findAll();
     }

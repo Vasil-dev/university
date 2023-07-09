@@ -1,6 +1,8 @@
 package ua.foxminded.university.service.impl;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import ua.foxminded.university.dto.LectureDto;
 import ua.foxminded.university.model.Lecture;
 import ua.foxminded.university.repository.LectureRepository;
 import ua.foxminded.university.service.LectureService;
@@ -12,8 +14,15 @@ public class LectureServiceImpl implements LectureService {
 
     private final LectureRepository lectureRepository;
 
+
+    @Autowired
     public LectureServiceImpl(LectureRepository lectureRepository) {
         this.lectureRepository = lectureRepository;
+    }
+
+    @Override
+    public Lecture getByName(String name) {
+        return lectureRepository.findByLectureName(name);
     }
 
     @Override
@@ -27,7 +36,11 @@ public class LectureServiceImpl implements LectureService {
     }
 
     @Override
-    public Lecture create(Lecture lecture) {
+    public Lecture create(LectureDto lectureDto) {
+        Lecture lecture = new Lecture();
+        lecture.setId(lectureDto.getId());
+        lecture.setLectureName(lectureDto.getLectureName());
+
         return lectureRepository.save(lecture);
     }
 

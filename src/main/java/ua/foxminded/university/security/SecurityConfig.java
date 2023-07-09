@@ -1,8 +1,10 @@
 package ua.foxminded.university.security;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -13,9 +15,11 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
+@EnableMethodSecurity
 public class SecurityConfig {
     private final CustomUserDetailService userDetailService;
 
+    @Autowired
     public SecurityConfig(CustomUserDetailService userDetailService) {
         this.userDetailService = userDetailService;
     }
@@ -25,7 +29,8 @@ public class SecurityConfig {
         http
                 .csrf().disable()
                 .authorizeRequests()
-                .requestMatchers("/css/**", "/webjars/**", "login", "register").permitAll()
+                .requestMatchers("/css/**", "/webjars/**", "/login").permitAll()
+//                .requestMatchers("/all").hasAnyRole("ADMIN", "USER")
                 .anyRequest().authenticated()
                 .and()
                 .formLogin(login -> login

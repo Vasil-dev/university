@@ -9,7 +9,6 @@ import ua.foxminded.university.model.UserEntity;
 import ua.foxminded.university.service.impl.RoleServiceImpl;
 import ua.foxminded.university.service.impl.UserServiceImpl;
 
-import java.util.Collections;
 import java.util.List;
 
 @Controller

@@ -6,4 +6,7 @@ import ua.foxminded.university.model.Group;
 
 @Repository
 public interface GroupRepository extends JpaRepository<Group,Long> {
+    Group findById(int id);
+    Group findByName(String name);
+
 }

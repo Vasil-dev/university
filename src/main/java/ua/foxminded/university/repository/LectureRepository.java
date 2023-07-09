@@ -6,4 +6,5 @@ import ua.foxminded.university.model.Lecture;
 
 @Repository
 public interface LectureRepository extends JpaRepository<Lecture, Long> {
+    Lecture findByLectureName(String name);
 }

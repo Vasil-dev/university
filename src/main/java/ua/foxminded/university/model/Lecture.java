@@ -13,11 +13,11 @@ import jakarta.persistence.CascadeType;
 import jakarta.persistence.FetchType;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
 
+import java.util.ArrayList;
 import java.util.Objects;
 
-@Getter @Setter @ToString
+@Getter @Setter
 @Entity
 @Table(name = "lecture", schema = "cms")
 public class Lecture {
@@ -25,7 +25,7 @@ public class Lecture {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private int id;
+    private Integer id;
 
     @Column(name = "lecture_name")
     private String lectureName;
@@ -52,7 +52,6 @@ public class Lecture {
     }
 
     public Lecture() {
-
     }
 
     @Override
@@ -67,4 +66,10 @@ public class Lecture {
     public int hashCode() {
         return Objects.hash(id, lectureName);
     }
+
+    @Override
+    public String toString() {
+        return lectureName;
+    }
+
 }

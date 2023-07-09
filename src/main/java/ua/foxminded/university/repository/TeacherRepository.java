@@ -6,4 +6,5 @@ import ua.foxminded.university.model.Teacher;
 
 @Repository
 public interface TeacherRepository extends JpaRepository<Teacher, Long> {
+    Teacher findById(int id);
 }

@@ -8,6 +8,7 @@ public interface GroupService {
 
     Group getById(long id);
 
+    Group getByName(String name);
     List<Group> getAll();
 
     Group create(Group group);
