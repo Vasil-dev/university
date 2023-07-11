@@ -16,6 +16,7 @@ import java.util.stream.Collectors;
 
 @Service
 public class CustomUserDetailService implements UserDetailsService {
+
     private final UserRepository userRepository;
 
     @Autowired
@@ -23,30 +24,19 @@ public class CustomUserDetailService implements UserDetailsService {
         this.userRepository = userRepository;
     }
 
-//    @Override
-//    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-//        UserEntity user = userRepository.findByUserName(username);
-//        if (user != null) {
-//            return new User(
-//                    user.getEmail(),
-//                    user.getPassword(),
-//                    user.getRoles().stream().map((role) -> new SimpleGrantedAuthority(role.getName()))
-//                            .collect(Collectors.toList()));
-//        } else {
-//            throw new UsernameNotFoundException("Invalid username or password");
-//        }
-//    }
     @Override
-public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-    UserEntity user = userRepository.findByUserName(username);
-    if (user != null) {
-        List<GrantedAuthority> authorities = user.getRoles().stream()
-                .map(role -> new SimpleGrantedAuthority(role.getName()))
-                .collect(Collectors.toList());
-        return new User(user.getEmail(), user.getPassword(), authorities);
-    } else {
-        throw new UsernameNotFoundException("Invalid username or password");
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        UserEntity user = userRepository.findByUserName(username);
+        if (user != null) {
+            List<GrantedAuthority> authorities = user.getRoles().stream()
+                    .map(role -> new SimpleGrantedAuthority(role.getName()))
+                    .collect(Collectors.toList());
+            return new User(
+                    user.getEmail(),
+                    user.getPassword(),
+                    authorities);
+        } else {
+            throw new UsernameNotFoundException("Invalid username or password");
+        }
     }
-}
-
 }

@@ -44,7 +44,7 @@ public class LectureController {
         return "redirect:/lecture/all";
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole(1)")
     @GetMapping("/new")
     public String showCreateLecturePage() {
         return "lecture/CreateLecture";
