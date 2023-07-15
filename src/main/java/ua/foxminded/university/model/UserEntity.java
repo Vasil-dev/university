@@ -1,5 +1,6 @@
 package ua.foxminded.university.model;
 
+
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
