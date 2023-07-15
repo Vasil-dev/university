@@ -32,7 +32,7 @@ public class CustomUserDetailService implements UserDetailsService {
                     .map(role -> new SimpleGrantedAuthority(role.getName()))
                     .collect(Collectors.toList());
             return new User(
-                    user.getEmail(),
+                    user.getUserName(),
                     user.getPassword(),
                     authorities);
         } else {

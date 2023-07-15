@@ -32,5 +32,5 @@ INSERT INTO cms.roles (id, name) VALUES (2,'USER');
 
 INSERT INTO cms.user_roles (user_id, role_id) VALUES (1,1);
 
-INSERT INTO cms.users (id, user_name, email, password, role_id) VALUES (1,'admin', 'qwerty', '$2a$10$GSYD4GHeMlDCFhSkGhN3beyB5kncLsuDlXdScbbl9qbqPjKiN1OxW', 1);
+INSERT INTO cms.users (id, user_name, password) VALUES (1,'admin', '$2a$10$GSYD4GHeMlDCFhSkGhN3beyB5kncLsuDlXdScbbl9qbqPjKiN1OxW');
 

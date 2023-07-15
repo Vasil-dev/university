@@ -56,7 +56,6 @@
         <tr>
             <th>ID</th>
             <th>Username</th>
-            <th>Email</th>
             <th>Role</th>
         </tr>
         </thead>
@@ -64,7 +63,6 @@
         <tr th:each="user : ${users}">
             <td class="h6" th:text="${user.getId}"></td>
             <td th:text="${user.getUserName}"></td>
-            <td th:text="${user.getEmail}"></td>
             <td th:text="${user.getRoles()}"></td>
             <td>
                 <form method="post" th:action="@{/users/{userId}/delete(userId=${user.id})}">

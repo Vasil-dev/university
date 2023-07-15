@@ -13,11 +13,10 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
-
 @Configuration
 @EnableWebSecurity
 @EnableMethodSecurity
-public class SecurityConfig  {
+public class SecurityConfig {
 
     private final CustomUserDetailService userDetailService;
 
@@ -29,11 +28,11 @@ public class SecurityConfig  {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         return http
-                .csrf(AbstractHttpConfigurer::disable)
-                .authorizeHttpRequests(requests -> requests
+                .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/css/**", "/webjars/**", "/login").permitAll()
-                        .requestMatchers("/all").hasAnyRole("ADMIN", "USER")
+//                        .requestMatchers("/all").hasAnyRole("ADMIN", "USER")
                         .anyRequest().authenticated())
+                .csrf(AbstractHttpConfigurer::disable)
                 .formLogin(login -> login
                         .loginPage("/login")
                         .defaultSuccessUrl("/all")

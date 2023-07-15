@@ -49,16 +49,13 @@ CREATE TABLE cms.lecture (
 DROP TABLE IF EXISTS cms.roles CASCADE;
 CREATE TABLE cms.roles (
                               id SERIAL PRIMARY KEY,
-                              name VARCHAR NOT NULL
+                              name VARCHAR
 );
 DROP TABLE IF EXISTS cms.users CASCADE;
 CREATE TABLE cms.users (
                            id SERIAL PRIMARY KEY,
                            user_name VARCHAR NOT NULL,
-                           email VARCHAR NOT NULL,
-                           password VARCHAR NOT NULL,
-                           role_id INT,
-                           FOREIGN KEY (role_id) REFERENCES cms.roles(id)
+                           password VARCHAR NOT NULL
 
 );
 DROP TABLE IF EXISTS cms.user_roles CASCADE;

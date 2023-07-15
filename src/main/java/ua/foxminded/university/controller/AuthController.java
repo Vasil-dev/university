@@ -1,7 +1,6 @@
 package ua.foxminded.university.controller;
 
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -10,15 +9,16 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import ua.foxminded.university.dto.Registration;
 import ua.foxminded.university.model.UserEntity;
-import ua.foxminded.university.service.UserService;
+import ua.foxminded.university.service.impl.UserServiceImpl;
 
 import javax.validation.Valid;
 
 @Controller
 public class AuthController {
-    private final UserService userService;
+    private final UserServiceImpl userService;
 
-    public AuthController(UserService userService) {
+    @Autowired
+    public AuthController(UserServiceImpl userService) {
         this.userService = userService;
     }
 
@@ -29,11 +29,6 @@ public class AuthController {
 
     @PostMapping("/register/save")
     public String register(@Valid @ModelAttribute("user") Registration user, BindingResult result, Model model) {
-        UserEntity existingUserEmail = userService.findByEmail(user.getEmail());
-        if (existingUserEmail != null && existingUserEmail.getEmail() != null && !existingUserEmail.getEmail().isEmpty()) {
-            return "redirect:/register?fail";
-        }
-
         UserEntity existingUserUsername = userService.getUserByUsername(user.getUserName());
         if (existingUserUsername != null && existingUserUsername.getUserName() != null
                 && !existingUserUsername.getUserName().isEmpty()) {
@@ -42,13 +37,12 @@ public class AuthController {
 
         if (result.hasErrors()) {
             model.addAttribute("user", user);
-            return "login/register";
+            return "login/login";
         }
 
         userService.saveUser(user);
         return "redirect:/users/all";
     }
-
 
     @GetMapping("/logout")
     public String logout() {

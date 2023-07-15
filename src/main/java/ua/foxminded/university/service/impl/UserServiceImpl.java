@@ -9,20 +9,17 @@ import ua.foxminded.university.repository.RoleRepository;
 import ua.foxminded.university.repository.UserRepository;
 import ua.foxminded.university.service.UserService;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
-    private final List<UserEntity> users;
     private final PasswordEncoder passwordEncoder;
 
     public UserServiceImpl(UserRepository userRepository, RoleRepository roleRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
-        this.users = new ArrayList<>();
         this.passwordEncoder = passwordEncoder;
     }
 
@@ -31,7 +28,6 @@ public class UserServiceImpl implements UserService {
         UserEntity user = new UserEntity();
         user.setId(registration.getId());
         user.setUserName(registration.getUserName());
-        user.setEmail(registration.getEmail());
         user.setPassword((passwordEncoder.encode(registration.getPassword())));
         Role role = roleRepository.findByName("USER");
         user.setRoles(List.of(role));
@@ -61,11 +57,6 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserEntity getUserById(int id) {
         return userRepository.findById(id);
-    }
-
-    @Override
-    public UserEntity findByEmail(String email) {
-        return userRepository.findByEmail(email);
     }
 
     @Override
