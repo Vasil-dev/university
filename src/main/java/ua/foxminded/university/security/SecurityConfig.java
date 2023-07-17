@@ -28,11 +28,11 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         return http
+                .csrf().disable()
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/css/**", "/webjars/**", "/login").permitAll()
-//                        .requestMatchers("/all").hasAnyRole("ADMIN", "USER")
-                        .anyRequest().authenticated())
-                .csrf(AbstractHttpConfigurer::disable)
+                        .requestMatchers("/lecture/new").hasAuthority("ADMIN")
+                        .requestMatchers("/all").hasAnyAuthority("ADMIN", "USER"))
                 .formLogin(login -> login
                         .loginPage("/login")
                         .defaultSuccessUrl("/all")

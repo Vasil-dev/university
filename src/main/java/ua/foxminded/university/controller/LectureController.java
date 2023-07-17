@@ -6,7 +6,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ua.foxminded.university.dto.LectureDto;
-import ua.foxminded.university.mapper.LectureMapper;
 import ua.foxminded.university.model.Group;
 import ua.foxminded.university.model.Lecture;
 import ua.foxminded.university.model.Teacher;
@@ -45,7 +44,7 @@ public class LectureController {
         return "redirect:/lecture/all";
     }
 
-    @PreAuthorize("hasRole(1)")
+    @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping("/new")
     public String showCreateLecturePage() {
         return "lecture/CreateLecture";
