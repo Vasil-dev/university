@@ -42,4 +42,14 @@ public class UserEntity {
             inverseJoinColumns = {@JoinColumn(name = "role_id", referencedColumnName = "id")})
     private List<Role> roles;
 
+    public UserEntity( String userName, String password) {
+        this.userName = userName;
+        this.password = password;
+    }
+    public UserEntity() {
+    }
+
+    public List<Role> getRoles() {
+        return roles;
+    }
 }

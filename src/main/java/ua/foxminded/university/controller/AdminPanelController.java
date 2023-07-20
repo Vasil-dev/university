@@ -1,15 +1,17 @@
 package ua.foxminded.university.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import ua.foxminded.university.dto.Registration;
 import ua.foxminded.university.model.Role;
 import ua.foxminded.university.model.UserEntity;
 import ua.foxminded.university.service.impl.RoleServiceImpl;
 import ua.foxminded.university.service.impl.UserServiceImpl;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -25,7 +27,6 @@ public class AdminPanelController {
     }
 
     @GetMapping("/all")
-    @PreAuthorize("hasAuthority('ADMIN')")
     public String manageUsers(Model model) {
         List<UserEntity> users = userService.getAllUsers();
         model.addAttribute("users", users);
@@ -35,6 +36,23 @@ public class AdminPanelController {
     @GetMapping("/add")
     public String addUser() {
         return "/users/add_user";
+    }
+
+    @PostMapping("/register/save")
+    public String register(@Valid @ModelAttribute("user") Registration user, BindingResult result, Model model) {
+        UserEntity existingUserUsername = userService.getUserByUsername(user.getUserName());
+        if (existingUserUsername != null && existingUserUsername.getUserName() != null
+                && !existingUserUsername.getUserName().isEmpty()) {
+            return "redirect:/register?fail";
+        }
+
+        if (result.hasErrors()) {
+            model.addAttribute("user", user);
+            return "login/login";
+        }
+
+        userService.saveUser(user);
+        return "redirect:/users/all";
     }
 
     @RequestMapping("/edit")
@@ -64,7 +82,6 @@ public class AdminPanelController {
         }
         return "redirect:/users/all";
     }
-
 
     @PostMapping("/{userId}/delete")
     public String deleteUser(@PathVariable("userId") int userId) {

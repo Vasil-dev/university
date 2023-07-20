@@ -16,10 +16,22 @@ import javax.validation.constraints.NotEmpty;
 public class LectureDto {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @NotEmpty
     private String lectureName;
     private Group group;
     private Teacher teacher;
     private Student student;
     private TimeTable timeTable;
+
+    public LectureDto(Integer id, String lectureName, Group group, Teacher teacher, Student student, TimeTable timeTable) {
+        this.id = id;
+        this.lectureName = lectureName;
+        this.group = group;
+        this.teacher = teacher;
+        this.student = student;
+        this.timeTable = timeTable;
+    }
+
+    public LectureDto() {
+
+    }
 }

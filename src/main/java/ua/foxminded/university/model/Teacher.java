@@ -39,7 +39,6 @@ public class Teacher {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
-
     }
 
     public Teacher() {

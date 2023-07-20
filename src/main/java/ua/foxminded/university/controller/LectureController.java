@@ -1,7 +1,6 @@
 package ua.foxminded.university.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -38,13 +37,6 @@ public class LectureController {
         return "lecture/LecturePage";
     }
 
-    @PostMapping("/{lectureId}/delete")
-    public String deleteUser(@PathVariable("lectureId") int lectureId) {
-        lectureService.delete(lectureId);
-        return "redirect:/lecture/all";
-    }
-
-    @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping("/new")
     public String showCreateLecturePage() {
         return "lecture/CreateLecture";
@@ -53,6 +45,12 @@ public class LectureController {
     @PostMapping("/new/save")
     public String saveNewLecture(@Valid @ModelAttribute("lecture") LectureDto lecture) {
         lectureService.create(lecture);
+        return "redirect:/lecture/all";
+    }
+
+    @PostMapping("/{lectureId}/delete")
+    public String deleteUser(@PathVariable("lectureId") int lectureId) {
+        lectureService.delete(lectureId);
         return "redirect:/lecture/all";
     }
 

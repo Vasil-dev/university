@@ -28,6 +28,15 @@ public class Role {
     @ManyToMany(mappedBy = "roles")
     private List<UserEntity> userEntity;
 
+    public Role(int id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
+    public Role() {
+
+    }
+
     @Override
     public String toString() {
         return name;
