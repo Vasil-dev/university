@@ -33,7 +33,7 @@ public class SecurityConfig {
                         .requestMatchers("/css/**", "/webjars/**", "/login").permitAll()
                         .requestMatchers("/users/**").hasAuthority("ADMIN")
                         .requestMatchers("/lecture/new/**", "/lecture/{lectureId}/delete", "/lecture/add/**", "/group/new/**", "/group/{groupId}/delete",
-                                "/student/new/**", "student/{studentId}/delete")
+                                "/student/new/**", "/student/{studentId}/delete", "/group/{groupId}/update", "/group/update/**")
                         .hasAuthority("ADMIN")
                         .requestMatchers("/lecture/all", "/all", "/teacher/all", "/student/all", "/group/all")
                         .hasAnyAuthority("ADMIN", "USER"))

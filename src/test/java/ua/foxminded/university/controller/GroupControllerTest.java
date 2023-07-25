@@ -18,9 +18,11 @@ import ua.foxminded.university.model.UserEntity;
 import ua.foxminded.university.service.impl.GroupServiceImpl;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+import static org.mockito.ArgumentMatchers.argThat;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -76,12 +78,58 @@ class GroupControllerTest {
         Group group = new Group(1, "Some Group");
 
         mvc.perform(MockMvcRequestBuilders.post("/group/new/save")
-                .with(SecurityMockMvcRequestPostProcessors.csrf())
-                .param("id", "1")
-                .param("name", "Some Group"))
+                        .with(SecurityMockMvcRequestPostProcessors.csrf())
+                        .param("id", "1")
+                        .param("name", "Some Group"))
                 .andExpect(status().is3xxRedirection())
                 .andExpect(redirectedUrl("/group/all"));
 
         verify(groupService).create(group);
+    }
+
+    @Test
+    void testShowUpdateGroupView() throws Exception {
+        List<Group> groups = Arrays.asList(
+                new Group(1, "Group 1"),
+                new Group(2, "Group 2")
+        );
+
+        when(groupService.getAll()).thenReturn(groups);
+
+        mvc.perform(get("/group/update"))
+                .andExpect(status().isOk())
+                .andExpect(view().name("group/UpdateGroupChoose"))
+                .andExpect(model().attribute("groups", groups));
+    }
+
+    @Test
+    void testShowRenameGroupView() throws Exception {
+        int groupId = 1;
+        Group group = new Group(groupId, "Group 1");
+
+        when(groupService.getById(groupId)).thenReturn(group);
+
+        mvc.perform(MockMvcRequestBuilders.get("/group/update/{groupId}", groupId))
+                .andExpect(status().isOk())
+                .andExpect(view().name("group/UpdateGroupRename"))
+                .andExpect(model().attribute("group", group));
+    }
+
+    @Test
+    void testRenameGroup() throws Exception {
+        int groupId = 1;
+        String updatedGroupName = "Updated Group";
+        Group group = new Group(groupId, "Group 1");
+
+        when(groupService.getById(groupId)).thenReturn(group);
+
+        mvc.perform(MockMvcRequestBuilders.post("/group/update/save")
+                        .param("id", String.valueOf(groupId))
+                        .param("name", updatedGroupName)
+                        .with(SecurityMockMvcRequestPostProcessors.csrf()))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(redirectedUrl("/group/all"));
+
+        verify(groupService).update(argThat(updatedGroup -> updatedGroup.getName().equals(updatedGroupName)));
     }
 }

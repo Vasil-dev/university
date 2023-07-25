@@ -44,4 +44,30 @@ public class GroupController {
         groupService.delete(groupId);
         return "redirect:/group/all";
     }
+
+    @GetMapping("/update")
+    public String showUpdateGroupView(Model model) {
+        List<Group> groups = groupService.getAll();
+        model.addAttribute("groups", groups);
+        return "group/UpdateGroupChoose";
+    }
+
+    @GetMapping("/update/{groupId}")
+    public String showRenameGroupView(@PathVariable("groupId") int groupId, Model model) {
+        Group group = groupService.getById(groupId);
+        model.addAttribute("group", group);
+        return "group/UpdateGroupRename";
+    }
+
+    @PostMapping("/update/save")
+    public String renameGroup(@Valid @ModelAttribute("group") Group updatedGroup) {
+        Group group = groupService.getById(updatedGroup.getId());
+        if (group != null) {
+            group.setName(updatedGroup.getName());
+            groupService.update(group);
+        }
+        return "redirect:/group/all";
+    }
+
+
 }

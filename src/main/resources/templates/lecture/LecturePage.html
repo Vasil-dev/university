@@ -48,7 +48,21 @@
         </div>
     </div>
 </nav>
-
+<nav class="navbar navbar-expand-lg navbar-dark">
+    <div>
+        <a href="/lecture/new" class="btn btn-success">Add new Lecture</a>
+    </div>
+    <div>
+        <form method="post" th:action="@{/lecture/add/group}">
+            <button type="submit" class="btn btn-primary">Add Group To Lecture</button>
+        </form>
+    </div>
+    <div>
+        <form method="post" th:action="@{/lecture/add/teacher}">
+            <button type="submit" class="btn btn-primary">Add Teacher To Lecture</button>
+        </form>
+    </div>
+</nav>
 <div class="container-fluid">
     <h2><span class="badge bg-light text-dark">Lectures</span></h2>
     <table class="table table-bordered table-secondary">
@@ -74,21 +88,7 @@
         </tr>
         </tbody>
     </table>
-    <nav class="navbar navbar-expand-lg navbar-dark">
-        <div>
-            <a href="/lecture/new" class="btn btn-success">Add new Lecture</a>
-        </div>
-        <div>
-            <form method="post" th:action="@{/lecture/add/group}">
-                <button type="submit" class="btn btn-primary">Add Group To Lecture</button>
-            </form>
-        </div>
-        <div>
-            <form method="post" th:action="@{/lecture/add/teacher}">
-                <button type="submit" class="btn btn-primary">Add Teacher To Lecture</button>
-            </form>
-        </div>
-    </nav>
+
 </div>
 </body>
 </html>
