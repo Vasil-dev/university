@@ -64,13 +64,18 @@
         <tr th:each="group : ${groups}">
             <td class="h6" th:text="${group.getId}"></td>
             <td th:text="${group.getName}"></td>
+            <td>
+                <form method="post" th:action="@{/group/{groupId}/delete(groupId=${group.id})}">
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                </form>
+            </td>
         <tr>
         </tbody>
     </table>
 
-    <a class="nav-link" aria-current="page" href="/group/CreateGroup"><h2>
-        <span class="badge bg-light text-dark">Add new group</span>
-    </h2></a>
+    <div>
+        <a href="/group/new" class="btn btn-success">Add new Group</a>
+    </div>
 </div>
 
 </body>

@@ -4,10 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import ua.foxminded.university.dto.GroupDto;
 import ua.foxminded.university.model.Group;
 import ua.foxminded.university.service.impl.GroupServiceImpl;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -28,16 +28,20 @@ public class GroupController {
         return "group/GroupPage";
     }
 
-    @GetMapping("/new")
-    public String showCreateGroupForm(Model model) {
-        Group group = new Group();
-        model.addAttribute("group", group);
+    @RequestMapping("/new")
+    public String showCreateGroupForm() {
         return "group/CreateGroup";
     }
 
-    @PostMapping("/new")
-    public String createGroup(@ModelAttribute("group") Group group) {
+    @PostMapping("/new/save")
+    public String createGroup(@Valid @ModelAttribute("group") Group group) {
         groupService.create(group);
+        return "redirect:/group/all";
+    }
+
+    @PostMapping("/{groupId}/delete")
+    public String deleteGroup(@PathVariable("groupId") int groupId) {
+        groupService.delete(groupId);
         return "redirect:/group/all";
     }
 }

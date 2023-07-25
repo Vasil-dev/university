@@ -32,10 +32,10 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/css/**", "/webjars/**", "/login").permitAll()
                         .requestMatchers("/users/**").hasAuthority("ADMIN")
-                        .requestMatchers("/lecture/new", "/lecture/new/save", "/lecture/{lectureId}/delete",
-                                "/lecture/add/group", "/lecture/add/group/save", "/lecture/add/teacher",
-                                "/lecture/add/teacher/save").hasAuthority("ADMIN")
-                        .requestMatchers("/lecture/all", "/all", "/teacher/all", "student/all", "group/all")
+                        .requestMatchers("/lecture/new/**", "/lecture/{lectureId}/delete", "/lecture/add/**", "/group/new/**", "/group/{groupId}/delete",
+                                "/student/new/**", "student/{studentId}/delete")
+                        .hasAuthority("ADMIN")
+                        .requestMatchers("/lecture/all", "/all", "/teacher/all", "/student/all", "/group/all")
                         .hasAnyAuthority("ADMIN", "USER"))
                 .formLogin(login -> login
                         .loginPage("/login")
