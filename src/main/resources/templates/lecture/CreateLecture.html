@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>New Lecture</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+    <h1>New Lecture</h1>
+
+    <form method="post" action="/lecture/new/save">
+        <div class="mb-3">
+            <label for="lectureName" class="form-label">Lecture Name</label>
+            <input type="text" class="form-control" id="lectureName" name="lectureName" placeholder="Lecture Name"
+                   required>
+        </div>
+        <button type="submit" class="btn btn-primary">Add New Lecture</button>
+    </form>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
