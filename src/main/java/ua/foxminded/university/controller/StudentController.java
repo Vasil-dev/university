@@ -3,11 +3,14 @@ package ua.foxminded.university.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+import ua.foxminded.university.model.Group;
+import ua.foxminded.university.model.Lecture;
 import ua.foxminded.university.model.Student;
+import ua.foxminded.university.service.impl.GroupServiceImpl;
 import ua.foxminded.university.service.impl.StudentServiceImpl;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -26,5 +29,47 @@ public class StudentController {
         List<Student> students = studentService.getAll();
         model.addAttribute("students", students);
         return "student/StudentPage";
+    }
+
+    @RequestMapping("/new")
+    public String showCreateStudentForm() {
+        return "student/CreateStudent";
+    }
+
+    @PostMapping("/new/save")
+    public String createStudent(@Valid @ModelAttribute("student") Student student) {
+        studentService.create(student);
+        return "redirect:/student/all";
+    }
+
+    @PostMapping("/{studentId}/delete")
+    public String deleteStudent(@PathVariable("studentId") int studentId) {
+        studentService.delete(studentId);
+        return "redirect:/student/all";
+    }
+
+    @GetMapping("/update")
+    public String showUpdateStudentView(Model model) {
+        List<Student> students = studentService.getAll();
+        model.addAttribute("students", students);
+        return "student/UpdateStudentChoose";
+    }
+
+    @GetMapping("/update/{studentId}")
+    public String showRenameStudentView(@PathVariable("studentId") int studentId, Model model) {
+        Student student = studentService.getById(studentId);
+        model.addAttribute("student", student);
+        return "student/UpdateStudentRename";
+    }
+
+    @PostMapping("/update/save")
+    public String renameStudent(@Valid @ModelAttribute("student") Student updatedStudent) {
+        Student student = studentService.getById(updatedStudent.getId());
+        if (student != null) {
+            student.setFirstName(updatedStudent.getFirstName());
+            student.setLastName(updatedStudent.getLastName());
+            studentService.update(student);
+        }
+        return "redirect:/student/all";
     }
 }

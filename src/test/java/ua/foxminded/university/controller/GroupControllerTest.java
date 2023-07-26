@@ -13,6 +13,8 @@ import org.springframework.security.test.web.servlet.request.SecurityMockMvcRequ
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import ua.foxminded.university.model.Group;
 import ua.foxminded.university.model.UserEntity;
 import ua.foxminded.university.service.impl.GroupServiceImpl;
@@ -23,8 +25,7 @@ import java.util.Collections;
 import java.util.List;
 
 import static org.mockito.ArgumentMatchers.argThat;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -93,7 +94,6 @@ class GroupControllerTest {
                 new Group(1, "Group 1"),
                 new Group(2, "Group 2")
         );
-
         when(groupService.getAll()).thenReturn(groups);
 
         mvc.perform(get("/group/update"))
@@ -130,6 +130,19 @@ class GroupControllerTest {
                 .andExpect(status().is3xxRedirection())
                 .andExpect(redirectedUrl("/group/all"));
 
-        verify(groupService).update(argThat(updatedGroup -> updatedGroup.getName().equals(updatedGroupName)));
+        verify(groupService).update(group);
+    }
+
+    @Test
+    void testDeleteGroup() throws Exception {
+
+        doNothing().when(groupService).delete(1);
+
+        mvc.perform(MockMvcRequestBuilders.post("/group/{groupId}/delete", 1)
+                        .with(SecurityMockMvcRequestPostProcessors.csrf()))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(redirectedUrl("/group/all"));
+
+        verify(groupService).delete(1);
     }
 }

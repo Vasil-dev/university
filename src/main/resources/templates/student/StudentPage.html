@@ -50,7 +50,14 @@
         </div>
     </div>
 </nav>
-
+<nav class="navbar navbar-expand-lg navbar-dark">
+    <div>
+        <a href="/student/new" class="btn btn-success">Add new student</a>
+    </div>
+    <div>
+        <a href="/student/update" class="btn btn-success">Update student</a>
+    </div>
+</nav>
 <div class="container-fluid">
     <h2><span class="badge bg-light text-dark">Students</span></h2>
     <table class="table table-bordered table-secondary">
@@ -59,6 +66,7 @@
             <th>ID</th>
             <th>First Name</th>
             <th>Last Name</th>
+            <th>Group</th>
         </tr>
         </thead>
         <tbody>
@@ -66,9 +74,16 @@
             <td class="h6" th:text="${student.getId}"></td>
             <td th:text="${student.getFirstName}"></td>
             <td th:text="${student.getLastName}"></td>
+            <td th:text="${student.getGroup}"></td>
+            <td>
+                <form method="post" th:action="@{/student/{studentId}/delete(studentId=${student.id})}">
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                </form>
+            </td>
         </tr>
         </tbody>
     </table>
+
 </div>
 </body>
 </html>

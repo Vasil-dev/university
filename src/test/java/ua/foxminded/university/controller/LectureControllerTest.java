@@ -23,6 +23,7 @@ import ua.foxminded.university.service.impl.LectureServiceImpl;
 import ua.foxminded.university.service.impl.TeacherServiceImpl;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -60,9 +61,9 @@ class LectureControllerTest {
 
     @Test
     void testGetAllLectures() throws Exception {
-        List<Lecture> lectures = new ArrayList<>();
-        lectures.add(new Lecture(1, "Some Lecture"));
-        lectures.add(new Lecture(2, "Some Lecture"));
+        List<Lecture> lectures = Arrays.asList(
+                new Lecture(1, "Some Lecture"),
+                new Lecture(2, "Some Lecture"));
 
         when(lectureService.getAll()).thenReturn(lectures);
 
@@ -114,13 +115,13 @@ class LectureControllerTest {
     @Test
     void testAddGroupToLecture() throws Exception {
 
-        List<Lecture> lectures = new ArrayList<>();
-        lectures.add(new Lecture(1, "Lecture 1"));
-        lectures.add(new Lecture(2, "Lecture 2"));
+        List<Lecture> lectures = Arrays.asList(
+                new Lecture(1, "Lecture1"),
+                new Lecture(2, "Lecture2"));
 
-        List<Group> groups = new ArrayList<>();
-        groups.add(new Group(1, "Group 1"));
-        groups.add(new Group(2, "Group 2"));
+        List<Group> groups = Arrays.asList(
+                new Group(1, "Group1"),
+                new Group(2, "Group2"));
 
         when(lectureService.getAll()).thenReturn(lectures);
         when(groupService.getAll()).thenReturn(groups);

@@ -49,7 +49,7 @@ public class LectureController {
     }
 
     @PostMapping("/{lectureId}/delete")
-    public String deleteUser(@PathVariable("lectureId") int lectureId) {
+    public String deleteLecture(@PathVariable("lectureId") int lectureId) {
         lectureService.delete(lectureId);
         return "redirect:/lecture/all";
     }
