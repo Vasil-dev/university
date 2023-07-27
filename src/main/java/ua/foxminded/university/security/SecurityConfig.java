@@ -25,6 +25,7 @@ public class SecurityConfig {
         this.userDetailService = userDetailService;
     }
 
+
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         return http
