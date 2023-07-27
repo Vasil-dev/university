@@ -50,8 +50,14 @@ public class LectureController {
 
     @PostMapping("/{lectureId}/delete")
     public String deleteLecture(@PathVariable("lectureId") int lectureId) {
-        lectureService.delete(lectureId);
-        return "redirect:/lecture/all";
+        Lecture lecture = lectureService.getById(lectureId);
+
+        if (lecture == null) {
+            throw new IllegalArgumentException("Lecture with ID " + lectureId + " not found.");
+        } else {
+            lectureService.delete(lectureId);
+            return "redirect:/lecture/all";
+        }
     }
 
     @RequestMapping("/add/group")

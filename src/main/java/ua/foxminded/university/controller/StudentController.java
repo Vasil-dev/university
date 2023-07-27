@@ -44,7 +44,14 @@ public class StudentController {
 
     @PostMapping("/{studentId}/delete")
     public String deleteStudent(@PathVariable("studentId") int studentId) {
-        studentService.delete(studentId);
+        Student student = studentService.getById(studentId);
+
+        if (student == null) {
+            throw new IllegalArgumentException("Student with ID " + studentId + " not found.");
+        } else {
+            studentService.delete(studentId);
+        }
+
         return "redirect:/student/all";
     }
 
@@ -58,8 +65,13 @@ public class StudentController {
     @GetMapping("/update/{studentId}")
     public String showRenameStudentView(@PathVariable("studentId") int studentId, Model model) {
         Student student = studentService.getById(studentId);
-        model.addAttribute("student", student);
-        return "student/UpdateStudentRename";
+
+        if (student == null) {
+            throw new IllegalArgumentException("Student with ID " + studentId + " not found.");
+        } else {
+            model.addAttribute("student", student);
+            return "student/UpdateStudentRename";
+        }
     }
 
     @PostMapping("/update/save")
