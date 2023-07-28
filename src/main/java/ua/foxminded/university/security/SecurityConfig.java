@@ -25,7 +25,6 @@ public class SecurityConfig {
         this.userDetailService = userDetailService;
     }
 
-
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         return http
@@ -33,9 +32,10 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/css/**", "/webjars/**", "/login").permitAll()
                         .requestMatchers("/users/**").hasAuthority("ADMIN")
-                        .requestMatchers("/lecture/new/**", "/lecture/{lectureId}/delete", "/lecture/add/**", "/group/new/**", "/group/{groupId}/delete",
-                                "/student/new/**", "/student/{studentId}/delete", "/group/{groupId}/update", "/group/update/**",
-                        "student/update/**")
+                        .requestMatchers("/lecture/new/**", "/lecture/{lectureId}/delete", "/lecture/add/**", "/group/new/**",
+                                "/group/{groupId}/delete", "/student/new/**", "/student/{studentId}/delete", "/group/{groupId}/update",
+                                "/group/update/**", "/student/update/**", "/teacher/new/**", "/teacher/{teacherId}/delete",
+                                "/teacher/update/**")
                         .hasAuthority("ADMIN")
                         .requestMatchers("/lecture/all", "/all", "/teacher/all", "/student/all", "/group/all")
                         .hasAnyAuthority("ADMIN", "USER"))

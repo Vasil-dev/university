@@ -66,14 +66,18 @@ class StudentControllerTest {
     }
 
     @Test
-    void testDeleteLecture() throws Exception {
-        doNothing().when(studentService).delete(1);
-        mvc.perform(MockMvcRequestBuilders.post("/student/{studentId}/delete", 1)
+    void testDeleteStudent() throws Exception {
+        int studentId = 1;
+        Student student = new Student(studentId, "First Name", "Last Name");
+
+        when(studentService.getById(studentId)).thenReturn(student);
+        doNothing().when(studentService).delete(studentId);
+        mvc.perform(MockMvcRequestBuilders.post("/student/{studentId}/delete", studentId)
                         .with(SecurityMockMvcRequestPostProcessors.csrf()))
                 .andExpect(status().is3xxRedirection())
                 .andExpect(redirectedUrl("/student/all"));
 
-        verify(studentService).delete(1);
+        verify(studentService).delete(studentId);
     }
 
     @Test
