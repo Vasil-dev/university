@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import ua.foxminded.university.model.Student;
 import ua.foxminded.university.model.Teacher;
 import ua.foxminded.university.service.impl.TeacherServiceImpl;
 
@@ -29,7 +28,7 @@ public class TeacherController {
         return "teacher/TeacherPage";
     }
 
-    @RequestMapping("/new")
+    @GetMapping("/new")
     public String showCreateTeacherForm() {
         return "teacher/CreateTeacher";
     }
@@ -53,7 +52,7 @@ public class TeacherController {
         return "redirect:/teacher/all";
     }
 
-    @RequestMapping("/update/{teacherId}")
+    @PostMapping("/update/{teacherId}")
     public String showRenameTeacherView(@PathVariable("teacherId") int teacherId, Model model) {
         Teacher teacher = teacherService.getById(teacherId);
 
