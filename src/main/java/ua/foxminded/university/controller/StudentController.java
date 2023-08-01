@@ -55,14 +55,7 @@ public class StudentController {
         return "redirect:/student/all";
     }
 
-    @GetMapping("/update")
-    public String showUpdateStudentView(Model model) {
-        List<Student> students = studentService.getAll();
-        model.addAttribute("students", students);
-        return "student/UpdateStudentChoose";
-    }
-
-    @GetMapping("/update/{studentId}")
+    @PostMapping("/update/{studentId}")
     public String showRenameStudentView(@PathVariable("studentId") int studentId, Model model) {
         Student student = studentService.getById(studentId);
 

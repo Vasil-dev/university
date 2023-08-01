@@ -91,7 +91,8 @@ class TeacherControllerTest {
 
         when(teacherService.getById(teacherId)).thenReturn(teacher);
 
-        mvc.perform(MockMvcRequestBuilders.get("/teacher/update/{teacherId}", teacherId))
+        mvc.perform(MockMvcRequestBuilders.post("/teacher/update/{teacherId}", teacherId)
+                        .with(SecurityMockMvcRequestPostProcessors.csrf()))
                 .andExpect(status().isOk())
                 .andExpect(view().name("teacher/UpdateTeacherRename"))
                 .andExpect(model().attribute("teacher", teacher));

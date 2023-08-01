@@ -21,12 +21,8 @@
                         Menu
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="/users">Admin Panel</a></li>
+                        <li><a class="dropdown-item" href="/users/all">Admin Panel</a></li>
                         <li><a class="dropdown-item" href="/logout">Logout</a></li>
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
-                        <li><a class="dropdown-item" href="#">Something else here</a></li>
                     </ul>
                 <li class="nav-item">
                     <a class="nav-link" aria-current="page" href="/all">Home</a>
@@ -43,6 +39,9 @@
                 <li class="nav-item">
                     <a class="nav-link" aria-current="page" href="/teacher/all">Teachers</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="/schedule/all">Schedule</a>
+                </li>
             </ul>
         </div>
     </div>
@@ -50,9 +49,6 @@
 <nav class="navbar navbar-expand-lg navbar-dark">
     <div>
         <a href="/group/new" class="btn btn-success">Add new Group</a>
-    </div>
-    <div>
-        <a href="/group/update" class="btn btn-primary">Rename Group</a>
     </div>
 </nav>
 <div class="container-fluid">
@@ -65,6 +61,7 @@
         <tr>
             <th>ID</th>
             <th>Name</th>
+            <th>Actions</th>
         </tr>
         </thead>
         <tbody>
@@ -72,16 +69,18 @@
             <td class="h6" th:text="${group.getId}"></td>
             <td th:text="${group.getName}"></td>
             <td>
-                <form method="post" th:action="@{/group/{groupId}/delete(groupId=${group.id})}">
+                <form method="post" th:action="@{/group/{groupId}/delete(groupId=${group.id})}"
+                      style="display: inline;">
                     <button type="submit" class="btn btn-danger">Delete</button>
                 </form>
+                <form method="post" th:action="@{/group/update/{groupId}(groupId=${group.id})}"
+                      style="display: inline;">
+                    <button type="submit" class="btn btn-primary">Update</button>
+                </form>
             </td>
-        <tr>
+        </tr>
         </tbody>
     </table>
-
-
 </div>
-
 </body>
 </html>

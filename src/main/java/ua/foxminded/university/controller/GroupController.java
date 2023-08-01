@@ -45,14 +45,7 @@ public class GroupController {
         return "redirect:/group/all";
     }
 
-    @GetMapping("/update")
-    public String showUpdateGroupView(Model model) {
-        List<Group> groups = groupService.getAll();
-        model.addAttribute("groups", groups);
-        return "group/UpdateGroupChoose";
-    }
-
-    @GetMapping("/update/{groupId}")
+    @PostMapping("/update/{groupId}")
     public String showRenameGroupView(@PathVariable("groupId") int groupId, Model model) {
         Group group = groupService.getById(groupId);
         model.addAttribute("group", group);

@@ -35,9 +35,9 @@ public class SecurityConfig {
                         .requestMatchers("/lecture/new/**", "/lecture/{lectureId}/delete", "/lecture/add/**", "/group/new/**",
                                 "/group/{groupId}/delete", "/student/new/**", "/student/{studentId}/delete", "/group/{groupId}/update",
                                 "/group/update/**", "/student/update/**", "/teacher/new/**", "/teacher/{teacherId}/delete",
-                                "/teacher/update/**")
+                                "/teacher/update/**", "/schedule/new/**", "/schedule/{scheduleId}/delete", "/schedule/update/**")
                         .hasAuthority("ADMIN")
-                        .requestMatchers("/lecture/all", "/all", "/teacher/all", "/student/all", "/group/all")
+                        .requestMatchers("/lecture/all", "/all", "/teacher/all", "/student/all", "/group/all", "/schedule/all")
                         .hasAnyAuthority("ADMIN", "USER"))
                 .formLogin(login -> login
                         .loginPage("/login")

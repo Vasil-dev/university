@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>New Schedule</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+  <h1>New Schedule</h1>
+
+  <form method="post" action="/schedule/new/save">
+    <div class="mb-3">
+      <label for="start" class="form-label">Start</label>
+      <input type="text" class="form-control" id="start" name="start" placeholder="Start"
+             required>
+    </div>
+    <div class="mb-3">
+      <label for="duration" class="form-label">Duration</label>
+      <input type="text" class="form-control" id="duration" name="duration" placeholder="Duration"
+             required>
+    </div>
+    <button type="submit" class="btn btn-primary">Add New Schedule</button>
+  </form>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

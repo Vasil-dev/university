@@ -48,7 +48,6 @@ public class TeacherController {
         } else {
             teacherService.delete(teacherId);
         }
-
         return "redirect:/teacher/all";
     }
 

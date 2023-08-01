@@ -16,8 +16,8 @@ CREATE TABLE cms.teachers (
 DROP TABLE IF EXISTS cms.timetable CASCADE;
 CREATE TABLE cms.timetable (
                                id SERIAL PRIMARY KEY ,
-                               start TIMESTAMP,
-                               duration INTERVAL
+                               start VARCHAR NOT NULL,
+                               duration VARCHAR NOT NULL
 
 );
 

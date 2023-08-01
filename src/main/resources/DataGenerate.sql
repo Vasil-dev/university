@@ -15,11 +15,11 @@ INSERT INTO cms.students (first_name, last_name, student_group_id) VALUES ('Vasi
 INSERT INTO cms.teachers (first_name, last_name) VALUES ('Danylo', 'Bubnii');
 INSERT INTO cms.teachers (first_name, last_name) VALUES ('Serhiy', 'Nemchinsky');
 
-INSERT INTO cms.timetable (id, start, duration) VALUES (1, '2023-12-23 08:00:00', '1:00');
-INSERT INTO cms.timetable (id, start, duration) VALUES (2, '2023-12-23 09:00:00', '1:00');
-INSERT INTO cms.timetable (id, start, duration) VALUES (3, '2023-12-23 10:00:00', '1:00');
-INSERT INTO cms.timetable (id, start, duration) VALUES (4, '2023-12-23 11:00:00', '1:00');
-INSERT INTO cms.timetable (id, start, duration) VALUES (5, '2023-12-23 12:00:00', '1:00');
+INSERT INTO cms.timetable (id, start, duration) VALUES (1, '08:00:00', '01:00:00');
+INSERT INTO cms.timetable (id, start, duration) VALUES (2, '09:00:00', '01:00:00');
+INSERT INTO cms.timetable (id, start, duration) VALUES (3, '10:00:00', '01:00:00');
+INSERT INTO cms.timetable (id, start, duration) VALUES (4, '11:00:00', '01:00:00');
+INSERT INTO cms.timetable (id, start, duration) VALUES (5, '12:00:00', '01:00:00');
 
 INSERT INTO cms.lecture (id, lecture_name, lecture_teacher_id, lecture_group_id,  lecture_time_id) VALUES (1, 'Math', 1, 3, 1);
 INSERT INTO cms.lecture (id, lecture_name, lecture_teacher_id, lecture_group_id, lecture_time_id) VALUES (2, 'Biology', 2, 2,2);
