@@ -46,6 +46,7 @@ public class UserEntity {
         this.userName = userName;
         this.password = password;
     }
+
     public UserEntity() {
     }
 

@@ -11,7 +11,6 @@ import jakarta.persistence.CascadeType;
 import jakarta.persistence.FetchType;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
 
 import java.util.List;
 import java.util.Objects;
@@ -42,7 +41,6 @@ public class Teacher {
     }
 
     public Teacher() {
-
     }
 
     @Override

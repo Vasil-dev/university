@@ -37,8 +37,9 @@ public class SecurityConfig {
                                 "/group/update/**", "/student/update/**", "/teacher/new/**", "/teacher/{teacherId}/delete",
                                 "/teacher/update/**", "/schedule/new/**", "/schedule/{scheduleId}/delete", "/schedule/update/**")
                         .hasAuthority("ADMIN")
-                        .requestMatchers("/lecture/all", "/all", "/teacher/all", "/student/all", "/group/all", "/schedule/all")
-                        .hasAnyAuthority("ADMIN", "USER"))
+                        .requestMatchers( "/teacher/all", "/student/all", "/group/all", "/schedule/all")
+                        .hasAnyAuthority("ADMIN", "USER")
+                        .requestMatchers("/lecture/all", "/all").hasAnyAuthority("ANONYMOUS", "ADMIN", "USER"))
                 .formLogin(login -> login
                         .loginPage("/login")
                         .defaultSuccessUrl("/all")

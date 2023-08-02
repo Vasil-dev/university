@@ -29,6 +29,7 @@ INSERT INTO cms.lecture (id, lecture_name, lecture_teacher_id, lecture_group_id,
 
 INSERT INTO cms.roles (id, name) VALUES (1,'ADMIN');
 INSERT INTO cms.roles (id, name) VALUES (2,'USER');
+INSERT INTO cms.roles (id, name) VALUES (3,'ANONYMOUS');
 
 INSERT INTO cms.user_roles (user_id, role_id) VALUES (1,1);
 
